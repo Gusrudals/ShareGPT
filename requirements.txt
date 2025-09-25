@@ -1,0 +1,3 @@
+# The calculator currently relies only on the Python standard library.
+# This file is kept to make it easy to add third-party packages in later
+# development phases (for example when packaging the application).
