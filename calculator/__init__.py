@@ -1,9 +1,4 @@
-"""Calculator package initialization.
-
-This package will host the calculation engine, including basic arithmetic,
-scientific operations, and calculus-related functionality. Modules are
-currently placeholders as part of the Step 2 project skeleton setup.
-"""
+"""Calculation engine and helper modules for the scientific calculator."""
 
 __all__ = [
     "engine",
