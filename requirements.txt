@@ -1,0 +1,2 @@
+# Core dependencies for the scientific calculator project.
+PyQt5==5.15.10
