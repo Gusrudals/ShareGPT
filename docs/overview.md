@@ -13,9 +13,9 @@ The calculator is organised into three primary layers:
 3. **Application entry point (`app.py`)** – Creates the Tk root window, instals
    the main UI frame, and starts the event loop.
 
-Automated tests in ``tests/`` exercise the calculation modules, and the
-documentation in ``docs/`` records the design and usage details. Packaging
-assets will be added under ``setup/`` in a later phase.
+Automated tests in ``tests/`` exercise the calculation modules, the
+documentation in ``docs/`` records the design and usage details, and
+PyInstaller packaging assets live under ``setup/``.
 
 ## Key features
 

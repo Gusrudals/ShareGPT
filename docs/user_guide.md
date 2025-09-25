@@ -11,6 +11,19 @@ python app.py
 The program is built with ``tkinter`` and does not require any third-party
 packages.
 
+## Building a standalone executable
+
+To create a Windows executable, install PyInstaller and run the helper script:
+
+```
+pip install pyinstaller
+python setup/build.py
+```
+
+The packaged files will be generated under the ``dist/scientific-calculator``
+directory. See ``setup/packaging.md`` for troubleshooting tips and additional
+options.
+
 ## Calculator panel
 
 * Enter numbers with the on-screen keypad or your keyboard.
