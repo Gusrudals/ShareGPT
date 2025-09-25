@@ -6,7 +6,6 @@ import tkinter as tk
 
 from ui.main_window import MainWindow
 
-
 def main() -> None:
     """Launch the graphical calculator interface."""
 
