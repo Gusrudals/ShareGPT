@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from calculator import scientific_operations as ops
+from calculator.scientific import operations as ops
 
 
 def test_trigonometry_in_radians() -> None:
@@ -40,3 +40,10 @@ def test_logarithm_invalid_arguments() -> None:
 
 def test_exponential() -> None:
     assert pytest.approx(ops.exponential(1)) == math.e
+
+
+def test_square_root() -> None:
+    assert ops.square_root(16) == 4
+
+    with pytest.raises(ValueError):
+        ops.square_root(-1)

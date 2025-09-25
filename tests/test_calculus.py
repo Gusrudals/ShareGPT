@@ -2,7 +2,7 @@
 
 import pytest
 
-from calculator import calculus_operations as ops
+from calculator.calculus import operations as ops
 
 
 def test_differentiate_polynomial() -> None:

@@ -2,8 +2,10 @@
 
 __all__ = [
     "engine",
-    "basic_operations",
-    "scientific_operations",
-    "calculus_operations",
+    "context",
+    "dispatcher",
     "exceptions",
+    "basic",
+    "scientific",
+    "calculus",
 ]

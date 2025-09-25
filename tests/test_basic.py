@@ -2,7 +2,7 @@
 
 import pytest
 
-from calculator import basic_operations as ops
+from calculator.basic import operations as ops
 
 
 def test_add() -> None:
@@ -24,3 +24,7 @@ def test_divide() -> None:
 def test_divide_by_zero() -> None:
     with pytest.raises(ZeroDivisionError):
         ops.divide(1, 0)
+
+
+def test_power() -> None:
+    assert ops.power(2, 3) == 8

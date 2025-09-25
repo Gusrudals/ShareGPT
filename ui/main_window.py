@@ -7,8 +7,9 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import Callable
 
-from calculator.calculus_operations import differentiate, integrate
-from calculator.engine import CalculatorEngine, EngineConfig
+from calculator.calculus import operations as calculus_ops
+from calculator.context import CalculatorContext
+from calculator.engine import CalculatorEngine
 from ui.widgets import ButtonPad
 
 
@@ -32,8 +33,8 @@ class MainWindow(ttk.Frame):
         self.engine = CalculatorEngine()
         self.expression_var = tk.StringVar()
         self.result_var = tk.StringVar(value="0")
-        self.angle_unit_var = tk.StringVar(value=self.engine.config.angle_unit)
-        self.precision_var = tk.StringVar(value=str(self.engine.config.precision))
+        self.angle_unit_var = tk.StringVar(value=self.engine.context.angle_unit)
+        self.precision_var = tk.StringVar(value=str(self.engine.context.precision))
         self.calculus_expression_var = tk.StringVar()
         self.calculus_variable_var = tk.StringVar(value="x")
         self.calculus_result_var = tk.StringVar(value="")
@@ -199,22 +200,15 @@ class MainWindow(ttk.Frame):
             text="Differentiate",
             command=self.differentiate_expression,
         )
-        differentiate_button.pack(side="left", padx=(0, 6))
+        differentiate_button.grid(row=0, column=0, padx=2)
 
         integrate_button = ttk.Button(
             actions_frame,
             text="Integrate",
             command=self.integrate_expression,
         )
-        integrate_button.pack(side="left")
+        integrate_button.grid(row=0, column=1, padx=2)
 
-        ttk.Label(calculus_frame, text="Result:").grid(
-            row=2,
-            column=0,
-            sticky="nw",
-            padx=6,
-            pady=(0, 8),
-        )
         calculus_result = ttk.Label(
             calculus_frame,
             textvariable=self.calculus_result_var,
@@ -263,7 +257,7 @@ class MainWindow(ttk.Frame):
             return
 
         try:
-            config = EngineConfig(
+            context = CalculatorContext(
                 angle_unit=self.angle_unit_var.get(),
                 precision=precision,
             )
@@ -271,7 +265,7 @@ class MainWindow(ttk.Frame):
             self._show_error(str(exc))
             return
 
-        self.engine.config = config
+        self.engine.context = context
 
         try:
             result = self.engine.evaluate(normalized_expression)
@@ -286,10 +280,10 @@ class MainWindow(ttk.Frame):
     # Calculus actions
     # ------------------------------------------------------------------
     def differentiate_expression(self) -> None:
-        self._run_calculus_operation(differentiate, "Differentiation error")
+        self._run_calculus_operation(calculus_ops.differentiate, "Differentiation error")
 
     def integrate_expression(self) -> None:
-        self._run_calculus_operation(integrate, "Integration error")
+        self._run_calculus_operation(calculus_ops.integrate, "Integration error")
 
     def _run_calculus_operation(
         self,
@@ -319,8 +313,7 @@ class MainWindow(ttk.Frame):
         self.evaluate_expression()
 
     def _on_angle_unit_change(self, _value: str) -> None:
-        # Validation is deferred to ``EngineConfig`` during evaluation.
-        pass
+        self.engine.context.angle_unit = self.angle_unit_var.get()
 
-    def _show_error(self, message: str, *, title: str = "Error") -> None:
-        messagebox.showerror(title, message, parent=self)
+    def _show_error(self, message: str, *, title: str = "Calculation error") -> None:
+        messagebox.showerror(title, message)
